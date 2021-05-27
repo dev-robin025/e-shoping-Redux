@@ -1,8 +1,10 @@
 import React from 'react';
-import { Accordion, Card, Table, Col, Button, InputGroup } from 'react-bootstrap';
+import { Accordion, Card, Table, Col, Row, Button, InputGroup } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaShoppingCart } from 'react-icons/fa';
 import { removeFromCart } from '../redux/actions/productAction';
+import emptyCart from '../images/emoty cart.gif'
+import { Link } from 'react-router-dom';
 
 const CartProduct = () => {
     const cartProduct = useSelector(state => state.cart.cartProduct)
@@ -19,7 +21,7 @@ const CartProduct = () => {
                 <tbody>
                     <tr>
                         {
-                            cartProduct.map((product) =>
+                            cartProduct.length ? cartProduct.map((product) =>
                                 <Accordion>
                                     <Card>
                                         <Accordion.Toggle as={Card.Header} eventKey='0'>
@@ -50,7 +52,19 @@ const CartProduct = () => {
                                             </Card.Body>
                                         </Accordion.Collapse>
                                     </Card>
-                                </Accordion>)
+                                </Accordion>) :
+                                <Row className="align-items-center">
+                                    <Col md={6}>
+                                        <img src={emptyCart} alt="" />
+                                    </Col>
+                                    <Col>
+                                        <h3>No items in your Cart</h3>
+                                        <h6>
+                                            <Link to='/'>Click here</Link> to add product
+                                        </h6>
+                                    </Col>
+                                </Row>
+
                         }
                     </tr>
                 </tbody>
