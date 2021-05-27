@@ -4,14 +4,13 @@ import { useEffect } from 'react';
 import { Row, Col, Container, InputGroup, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { removeSelectedProduct, selectedProduct } from '../redux/actions/productAction';
+import { addToCart, removeSelectedProduct, selectedProduct } from '../redux/actions/productAction';
 import loading from '../images/loading.gif';
 
 const ProductDetail = () => {
     const { id } = useParams()
     const dispatch = useDispatch()
     const product = useSelector(state => state.productReducer.selectedProduct)
-    console.log(product)
 
     const fetchProduct = async () => {
         axios.get(`https://fakestoreapi.com/products/${id}`)
@@ -47,7 +46,8 @@ const ProductDetail = () => {
                                 </InputGroup.Text>
                             </InputGroup>
                             <p>{product.description}</p>
-                            <Button variant="secondary">Add to Cart</Button>
+                            <Button variant="secondary" 
+                            onClick={()=>dispatch(addToCart(product))}>Add to Cart</Button>
                         </Col>
                     </Row> :
                     <div className="d-flex justify-content-center">

@@ -10,16 +10,11 @@ import loading from '../images/loading.gif';
 const Products = () => {
     const allProduct = useSelector(state => state.productReducer.allProduct)
     const dispatch = useDispatch()
-    console.log(allProduct)
-
-    const fetchProducts = async () => {
-        await axios.get('https://fakestoreapi.com/products')
-            .then(res => dispatch(setProducts(res.data)))
-            .catch(err => console.log(err))
-    }
 
     useEffect(() => {
-        fetchProducts()
+        axios.get('https://fakestoreapi.com/products')
+            .then(res => dispatch(setProducts(res.data)))
+            .catch(err => console.log(err))
     }, [])
 
     return (
