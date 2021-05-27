@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
-    const cartProduct = useSelector(state => state.productReducer.cartProduct)
+    const cartProduct = useSelector(state => state.cart.cartProduct)
 
     return (
         <Navbar bg="light" sticky="top" expand="lg">

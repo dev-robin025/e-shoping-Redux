@@ -1,25 +1,25 @@
 import React from 'react';
 import { Accordion, Card, Table, Col, Button, InputGroup } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { FaShoppingCart } from 'react-icons/fa';
+import { removeFromCart } from '../redux/actions/productAction';
 
 const CartProduct = () => {
-    const cartProduct = useSelector(state => state.productReducer.cartProduct)
-    const removeFromCart = (id) => {
-        console.log("product removed success", id)
-    }
+    const cartProduct = useSelector(state => state.cart.cartProduct)
+    const dispatch = useDispatch()
+
     return (
         <div className="container">
             <Table striped bordered hover>
                 <thead>
                     <tr>
-                        <th className="text-center">You have {cartProduct.length} products in your busket</th>
+                        <th className="text-center">You have {cartProduct?.length} products in your busket</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         {
-                            cartProduct.map(product =>
+                            cartProduct.map((product) =>
                                 <Accordion>
                                     <Card>
                                         <Accordion.Toggle as={Card.Header} eventKey='0'>
@@ -44,7 +44,7 @@ const CartProduct = () => {
                                                         </InputGroup.Text>
                                                     </InputGroup><br />
                                                     <Button variant="danger"
-                                                        onClick={() => removeFromCart(product.id)}>Remove from Cart</Button>
+                                                        onClick={() => dispatch(removeFromCart(product.id))}>Remove from Cart</Button>
                                                 </Col>
 
                                             </Card.Body>

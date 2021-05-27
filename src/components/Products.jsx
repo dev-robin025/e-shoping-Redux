@@ -8,7 +8,7 @@ import SingleProduct from './SingleProduct';
 import loading from '../images/loading.gif';
 
 const Products = () => {
-    const allProduct = useSelector(state => state.productReducer.allProduct)
+    const allProduct = useSelector(state => state.product.allProduct)
     const dispatch = useDispatch()
 
     useEffect(() => {

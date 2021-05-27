@@ -10,7 +10,7 @@ import loading from '../images/loading.gif';
 const ProductDetail = () => {
     const { id } = useParams()
     const dispatch = useDispatch()
-    const product = useSelector(state => state.productReducer.selectedProduct)
+    const product = useSelector(state => state.product.selectedProduct)
 
     const fetchProduct = async () => {
         axios.get(`https://fakestoreapi.com/products/${id}`)
